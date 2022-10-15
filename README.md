@@ -5,8 +5,8 @@
 <th>Naive Algorithm</th>
 </tr>
 <tr>
-<td><img src="./gifs/case_iv.gif" width="240px"></td>
-<td><img src="./gifs/case_iii.gif" width="240px"></td>
+<td><img src="./figs/case_iv.gif" width="240px"></td>
+<td><img src="./figs/case_iii.gif" width="240px"></td>
 </tr>
 </table>
 
