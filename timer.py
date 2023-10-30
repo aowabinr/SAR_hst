@@ -26,8 +26,9 @@ AGENT_CMAPS = ['Reds', 'Blues', 'Greens', 'Wistia']
 
 
 def get_count_based_novelties(env, state_inds, device='cpu'):
-    """Method to compute novelties based on state visits
-
+    """
+    Method to compute novelties based on state visits
+    :param env:
 
     """
     env_visit_counts = env.get_visit_counts()
@@ -46,8 +47,11 @@ def get_count_based_novelties(env, state_inds, device='cpu'):
 def get_intrinsic_rewards(novelties, config, intr_rew_rms,
                           update_irrms=False, active_envs=None, device='cpu'):
 
-    """Method to compute the intrinsic rewards based on novelties
-    
+    """
+    Method to compute the intrinsic rewards based on novelties
+    :param novelties: (np.array) -  array of size (num_threads, i, j) describing novelty by agent i as perceived by agent j.
+    :param config: (dict) - inputs parsed from command line
+    :param intr_rew_rms:
     """
     if update_irrms:
         assert active_envs is not None
@@ -133,11 +137,15 @@ def make_parallel_env(config, seed):
 
 
 def run(config, dir_idx=0):
+    """
+    Main function to run the
+    """
     #set torch params, and relevant directories
     torch.set_num_threads(1)
     env_descr = 'map%i_%iagents_task%i' % (config.map_ind, config.num_agents,
                                            config.task_config)
     model_dir = Path('./models') / config.env_type / env_descr / config.model_name
+    
     if not model_dir.exists():
         run_num = 1
     else:
@@ -199,6 +207,7 @@ def run(config, dir_idx=0):
 
     #this block of code initializes the model and parameters associated with the training
     #Load model from file if provided, else initialize e a SAC model
+    #Initailize the model
     print(f"config load model: {config.load_model}")
     print(f"config model path: {config.model_path}")
     if config.load_model and config.model_path is not None:
@@ -236,8 +245,10 @@ def run(config, dir_idx=0):
         adv_buffer = ReplayBuffer(config.buffer_length, model.nagents,
                                  env.state_space,
                                  env.observation_space,
+
                                  env.action_space)
-        
+
+    #Initialize intrinsic rewards
     intr_rew_rms = [[RunningMeanStd()
                      for i in range(config.num_agents)]
                     for j in range(n_intr_rew_types)]
@@ -308,8 +319,6 @@ def run(config, dir_idx=0):
     #initialize aggregations for saving into a csv
     agg_coop_rewards_time = None
     agg_adv_rewards_time = None
-    agg_coop_rewards_ep = None
-    agg_adv_rewards_ep = None
 
     #compute parameters for beta
     param_k = -np.log(config.beta_low/config.beta) / (1 - config.threshold_t)*config.max_episode_length

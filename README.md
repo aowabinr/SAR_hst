@@ -5,8 +5,8 @@
 <th>Naive Algorithm</th>
 </tr>
 <tr>
-<td><img src="./figs/case_iv.gif" width="240px"></td>
-<td><img src="./figs/case_iii.gif" width="240px"></td>
+<td><img src="./gifs/case_iv.gif" width="240px"></td>
+<td><img src="./gifs/case_iii.gif" width="240px"></td>
 </tr>
 </table>
 
@@ -38,9 +38,6 @@ Aowabin Rahman,  Arnab Bhattacharya, Thiagarajan Ramachandran, Sayak Mukherjee, 
 ├── timer.py # Main code for running the experiments
 ~~~
 
-
-<!-- Nevertheless, decentralized coordination may be ineffective in adversarial environments due to sensor noise, actuation faults, or even manipulation of the communication data without agents' knowledge. In this paper, we propose a new algorithmic approach based on adversarial multi-agent reinforcement learning (MARL) that allows robots to efficiently coordinate their strategies in the presence of adversarial communications. The objective of the multi-robot team is to discover targets strategically in an obstacle-strewn environment by minimizing the average time needed to find  the targets. In our setup, the robots have no prior knowledge of the target locations, and they can interact with only a subset of neighboring robots at any time due to communication constraints. Based on the centralized training with decentralized execution (CTDE) paradigm in MARL, we utilize a hierarchical meta-learning framework to learn dynamic team-coordination modalities and discover emergent team behavior under complex cooperative-competitive scenarios. The effectiveness of our approach is compared to other state-of-the-art adversarial MARL algorithms is demonstrated on a collection of Grid-world environments with different specifications  of  benign and adversarial agents, target locations and agent rewards. -->
-
 ## Requirements
 Conda environment specification is located in `environment.yml`. Use this file to manually install dependencies if desired.
 Otherwise, follow instructions in the next section.
@@ -62,7 +59,10 @@ A few additional notes:
 
 ## Methods
 ### Environment
-We used a 2D Gridworld environment for the search and rescue problem. The black cells correspond to obstacles that the agents can not occupy. 
+We used a 2D Gridworld environment for the search and rescue problem. The black cells correspond to obstacles that the agents can not occupy.  
+You can customize your own environment by editing any of the current environments, or adding a new environemnt in ./envs/magw/maps. Follow the nomenclature for creating the .txt file: map{$map_id}_{num_target}_multi.txt. If you'd like to customize the environment further, please do so in the following directory: ./envs/magw/maps. To edit the environment,  you can change ./envs/magw/maps/multiagent_env.py. 
+To change the novelty-based reward function, edit the "compute_final_reward" function in load_env.py
+
 <img src="./gifs/init.png" width="360px">
 
 ### State Space and Action Space
@@ -73,9 +73,6 @@ We examine two state spaces to deal with possible disaster areas and scenarios. 
 ```shell
 python main.py --help
 ```
-
-All hyperparameters can be found in the Appendix of the paper. Default hyperparameters are for Task 1 in the GridWorld environment using 2 agents.
-For Flip-Task include the flags `--task_config 4 --map_ind -1`. -->
 
 ## Citing our work
 
