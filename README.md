@@ -68,6 +68,16 @@ To change the novelty-based reward function, edit the "compute_final_reward" fun
 ### State Space and Action Space
 We examine two state spaces to deal with possible disaster areas and scenarios. Action space consists of four possible directions, A={up,down,right,left}.
 
+The observations for each agent are:
+- surrounding walls in each of four directions (4)
+- pits at the current location and each of four locations (5)
+- retrieved targets (total number of targets)
+- current location (2)
+- Location of other agents if they are within a certain distance (num_agents - 1)*2
+
+
+
+
 <!-- All training code is contained within `main.py`. To view options simply run:
 
 ```shell
