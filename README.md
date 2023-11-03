@@ -45,7 +45,7 @@ Otherwise, follow instructions in the next section.
 ## Installation
 Install conda environment with all dependencies
 ```shell
-conda env create -f environment.yml
+conda env create -f dnc2s.yml
 ```
 
 Activate environment
@@ -56,6 +56,29 @@ conda activate multi-explore
 A few additional notes:
 - You may have issues installing initially some of the libraries under "pip" using "conda env create -f environment.yml". If this happens, I recommend activating the conda environment and then manually using pip install ...
 - To run GridWorld environment only in Baselines, you probably don't need MuJoCo and other libraries that the authors used for VizDoom environments. For me, I had issues installing these libraries in Marianas. To get around this problem,  git clone baselines only (i.e. "git clone https://github.com/openai/baselines.git") and install the baselines package only. 
+
+To install OpenAI Baselines without MuJoCo, follow these steps:
+```shell
+git clone https://github.com/openai/baselines.git
+cd baselines
+```
+
+Install tensorlfow
+```shell
+pip install tensorflow==1.14
+```
+
+Install the core package:
+
+Install tensorlfow
+```shell
+pip install -e .
+```
+
+- There is a possibility that you might face an issue with TensorBoardX: an error the code needs to be regenerated to be compatible with protobuf. If this happens do the following:
+```shell
+pip install protobuf==3.20.*
+```
 
 ## Methods
 ### Environment
